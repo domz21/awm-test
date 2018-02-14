@@ -1,0 +1,84 @@
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { View, Text, ImageBackground, Image, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import Dimensions from 'Dimensions';
+//import HeaderButton from '../components/HeaderButton';
+
+const screen = Dimensions.get('window');
+
+export default class TouristScreen extends PureComponent {
+  static propTypes = {
+    attraction: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      rating: PropTypes.string.isRequired
+    }).isRequired,
+  };
+
+  render() {
+    // const { navigate } = this.props.navigation;
+    const { attraction, onPress } = this.props;
+    const { name, rating, image } = attraction;
+    return (
+      <ScrollView style = {styles.container}>
+        {/*<HeaderButton onPress = {() => navigate('DrawerOpen')} />
+        <Text style = {styles.header}>Mga puds ditey</Text>*/}
+        <TouchableOpacity
+          style = {styles.row}
+          onPress = {onPress}
+          activeOpacity = {0.7}
+        >
+          {/*Background Image*/}
+          <ImageBackground
+            source = {{uri: image}}
+            style = {styles.imageBackground}
+          >
+            <Text style = {[styles.text, styles.title]}>{name}</Text>
+            <View style = {styles.rating}>
+              <Text style = {[styles.text, styles.value]}>{rating}</Text>
+            </View>
+          </ImageBackground>
+        </TouchableOpacity>
+      </ScrollView>
+    );
+  }
+
+  _handlePress = () => {
+    this.props.navigation.navigate('Attraction');
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff'
+  },
+  header: {
+    fontSize: 20,
+    marginVertical: 20
+  },
+  row: {
+    paddingBottom: 4
+  },
+  imageBackground: {
+    height: screen.height / 3,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  text: {
+    color: '#fff',
+    backgroundColor: 'transparent',
+    fontWeight: 'bold',
+    textShadowColor: '#222',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 4
+  },
+  title: {
+    fontSize: 22
+  },
+  rating: {
+    flexDirection: 'row'
+  },
+  value: {
+    fontSize: 15
+  }
+});
