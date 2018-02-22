@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 //const morgan = require('morgan');
-const passport = require('passport');
+// const passport = require('passport');
 const bodyParser = require('body-parser');
 const auth = require('./controllers/auth');
 const reviews = require('./controllers/reviews');
@@ -36,19 +36,16 @@ mongoose.connect(config.mongo.dbURI, () => {
 //   });
 // });
 
-//init passport
-app.use(passport.initialize());
-app.use(passport.session());
 
 //logger to output all requests to console
 // app.use(morgan('combined'));
 // app.use('/v1', router);
 
 //auth routes
-app.get('/auth/facebook', auth.fbLogin);
-app.get('/auth/google', auth.googleLogin);
-app.get('/auth/facebook/callback', auth.fbMiddleware, auth.oauthCallback);
-app.get('/auth/google/callback', auth.googleMiddleware, auth.oauthCallback);
+// app.get('/auth/facebook', auth.fbLogin);
+// app.get('/auth/google', auth.googleLogin);
+// app.get('/auth/facebook/callback', auth.fbMiddleware, auth.oauthCallback);
+// app.get('/auth/google/callback', auth.googleMiddleware, auth.oauthCallback);
 
 //comment routes
 app.route('/reviews')

@@ -116,7 +116,8 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     flexDirection: 'row-reverse',
     borderBottomColor: '#1b2657',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
+    marginBottom: -15
   },
   socMedia: {
     paddingVertical: 15,

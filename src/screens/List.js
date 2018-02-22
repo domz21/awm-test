@@ -29,6 +29,8 @@ export default class List extends Component {
   //fetch restaurant list when component is about to be mounted
   componentWillMount = () => this.fetchRestaurants();
 
+  componentWillUnMount = () => this.fetchRestaurants.remove();
+
   //refetch restaurants when user pulls list down
   onRefresh = () => this.fetchRestaurants();
 

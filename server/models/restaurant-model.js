@@ -14,7 +14,10 @@ const restaurantSchema = new Schema({
   coordinate: Array,
   contact: String,
   desc: String,
-  image: String
+  image: String,
+  mone: String,
+  mtwo: String,
+  mthree: String
 });
 
 const Restaurant = mongoose.model('restaurant', restaurantSchema);

@@ -7,17 +7,15 @@ import Dimensions from 'Dimensions';
 const { width, height } = Dimensions.get('window');
 const defaultHeight = height;
 
-export default class Restaurant extends Component {
+export default class Attraction extends Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
-    restaurant: PropTypes.shape({
+    attraction: PropTypes.shape({
       name: PropTypes.string,
       rating: PropTypes.string,
       image: PropTypes.string,
       desc: PropTypes.string,
-      mone: PropTypes.string,
-      mtwo: PropTypes.string,
-      mthree: PropTypes.string
+      address: PropTypes.string
     }),
     onClose: PropTypes.func
   }
@@ -142,8 +140,8 @@ export default class Restaurant extends Component {
   }
 
   render (){
-    const { restaurant } = this.props;
-    const { name, rating, open, close, closed, desc, image, mone, mtwo, mthree } = restaurant || {};
+    const { attraction } = this.props;
+    const { name, rating, open, close, address, desc, image } = attraction || {};
     if(!this.state.visible){
       return null;
     }
@@ -168,22 +166,16 @@ export default class Restaurant extends Component {
             <View style = {[styles.descContainer, this.getStyles().descContainer]}>
               <Text style = {[styles.text, styles.title, this.getStyles().title]}>{name.toUpperCase()}</Text>
               <Card style = {styles.cardOne}>
-                <View style = {{ flexDirection: 'row' }}>
-                  <Text>Open: {open}</Text>
-                  <Text style = {{ marginLeft: 20 }}>Closed Every: {closed}</Text>
-                </View>
-                <View style = {{ flexDirection: 'row' }}>
-                  <Text>Close: {close}</Text>
-                  <Text style = {{ marginLeft: 45 }}>Rating: {rating}</Text>
+                <View style = {{ alignItems: 'center' }}>
+                  <Text>{address}</Text>
+                  <Text>{rating}</Text>
                 </View>
               </Card>
               <View style = {styles.desc}>
                 <Card title="Description" style = {styles.card}>
                   <Text style = {{ width: 300, fontSize: 12 }}>{desc}</Text>
                 </Card>
-                <Card title="Menu" style = {styles.card} image = {{uri: mone}}>
-
-                </Card>
+              
               </View>
             </View>
           </ScrollView>

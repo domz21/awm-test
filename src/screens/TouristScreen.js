@@ -10,21 +10,23 @@ export default class TouristScreen extends PureComponent {
   static propTypes = {
     attraction: PropTypes.shape({
       name: PropTypes.string.isRequired,
-      rating: PropTypes.string.isRequired
+      rating: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired
     }).isRequired,
+    onOpen: PropTypes.func.isRequired
   };
 
   render() {
     // const { navigate } = this.props.navigation;
-    const { attraction, onPress } = this.props;
-    const { name, rating, image } = attraction;
+    const { attraction, attraction: { name, rating, image }, onOpen } = this.props;
+    //const { name, rating, image } = attraction;
     return (
       <ScrollView style = {styles.container}>
         {/*<HeaderButton onPress = {() => navigate('DrawerOpen')} />
         <Text style = {styles.header}>Mga puds ditey</Text>*/}
         <TouchableOpacity
           style = {styles.row}
-          onPress = {onPress}
+          onPress = {() => onOpen(attraction)}
           activeOpacity = {0.7}
         >
           {/*Background Image*/}
