@@ -3,7 +3,7 @@ import { View, RefreshControl, ScrollView, StyleSheet } from 'react-native';
 import { get, put } from '../../api';
 import TouristScreen from './TouristScreen';
 import Attraction from './Tourista/Attraction';
-
+import { SearchBar } from 'react-native-elements';
 
 export default class TouristList extends Component {
   // static propTypes = {
@@ -15,6 +15,19 @@ export default class TouristList extends Component {
     attractions: [], //attraction array fetched from backend
     refreshing: true
   };
+
+  setSearchText(event){
+    searchText = event.nativeEvent.text;
+    restaurants = this.state.dataBackup;
+    searchText = searchText.trim().toLowerCase();
+
+    restaurants = restaurants.filter(restaurant => {
+      restaurant.name.match( searchText );
+    });
+    this.setState({
+      restaurants: restaurants
+    });
+  }
 
   openAttraction = (attraction) => {
     this.setState({
@@ -56,6 +69,11 @@ export default class TouristList extends Component {
     const { attractions } = this.state;
     return (
       <View style = {styles.container}>
+        <SearchBar
+          lightTheme
+          onChange = {this.setSearchText.bind(this)}
+          placeholder = 'Type here...'
+        />
         <ScrollView
           ref = {(scrollView) => { this._scrollView = scrollView; }}
           refreshControl = {
@@ -86,6 +104,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 20
+    //paddingTop: 20
   }
 });

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, Image, ImageBackground, ScrollView, TouchableOpacity, Animated, LayoutAnimation, PanResponder, TouchableWithoutFeedback, StyleSheet } from 'react-native';
-import { Card } from 'react-native-elements';
+import { View, Text, Image, ImageBackground, ScrollView, TouchableOpacity,
+  Animated, LayoutAnimation, PanResponder, TouchableWithoutFeedback,
+  KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
+import { Card, Icon, Rating } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import Dimensions from 'Dimensions';
+import TouristReviewList from '../Reviews/TouristReviewList';
 
 const { width, height } = Dimensions.get('window');
 const defaultHeight = height;
@@ -139,6 +142,10 @@ export default class Attraction extends Component {
     };
   }
 
+  ratingCompleted(rating) {
+    console.log("Rating is: " + rating)
+  }
+
   render (){
     const { attraction } = this.props;
     const { name, rating, open, close, address, desc, image } = attraction || {};
@@ -148,7 +155,7 @@ export default class Attraction extends Component {
   //  const { navigate } = this.props.navigation;
     //const { name, rating, desc, image } = restaurant;
     return (
-      <View style = {styles.container}>
+      <KeyboardAvoidingView behavior = 'padding' style = {styles.container}>
         <TouchableWithoutFeedback onPress = {this.props.onClose}>
           <Animated.View style = {[styles.backdrop, { opacity: this.state.opacity }]}/>
         </TouchableWithoutFeedback>
@@ -164,18 +171,63 @@ export default class Attraction extends Component {
           />
           <ScrollView>
             <View style = {[styles.descContainer, this.getStyles().descContainer]}>
-              <Text style = {[styles.text, styles.title, this.getStyles().title]}>{name.toUpperCase()}</Text>
-              <Card style = {styles.cardOne}>
+              <Text style = {[styles.text, styles.title, this.getStyles().title]}>{name}</Text>
+              <View style = {styles.icons}>
+                {/*<TouchableOpacity>
+                  <Icon
+                    reverse
+                    name='phone-call'
+                    type='feather'
+                    color='#75CF36'
+                    size = {23}
+                  />
+                  <Text style = {{ textAlign: 'center' }}>Call</Text>
+                </TouchableOpacity>*/}
+                <TouchableOpacity>
+                  <Icon
+                    reverse
+                    name='pencil'
+                    type='entypo'
+                    color='#305FEC'
+                    size = {23}
+                  />
+                  <Text style = {{ textAlign: 'center' }}>Review</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Icon
+                    reverse
+                    name='location'
+                    type='entypo'
+                    color='#009688'
+                    size = {23}
+                  />
+                  <Text style = {{ textAlign: 'center' }}>Location</Text>
+                </TouchableOpacity>
+              </View>
+              <Card title = {address} style = {styles.cardOne}>
                 <View style = {{ alignItems: 'center' }}>
-                  <Text>{address}</Text>
-                  <Text>{rating}</Text>
+
                 </View>
               </Card>
               <View style = {styles.desc}>
                 <Card title="Description" style = {styles.card}>
                   <Text style = {{ width: 300, fontSize: 12 }}>{desc}</Text>
                 </Card>
-              
+                <Card title = "Ratings" style = {styles.ratings}>
+                  <Rating
+                    type="heart"
+                    ratingCount={5}
+                    fractions={2}
+                    startingValue={3.42}
+                    imageSize={30}
+                    onFinishRating={this.ratingCompleted}
+                    showRating
+                    style={{ padding: 15, flexDirection: 'row' }}
+                  />
+                </Card>
+                <Card title = "Reviews" style = {styles.card}>
+                  <TouristReviewList />
+                </Card>
               </View>
             </View>
           </ScrollView>
@@ -190,7 +242,7 @@ export default class Attraction extends Component {
             </TouchableOpacity>
           </View>
         </Animated.View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -204,6 +256,10 @@ const styles = StyleSheet.create({
   backdrop: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'black',
+  },
+  icons: {
+    flexDirection: 'row',
+    paddingLeft: 115
   },
   modal: {
     backgroundColor: '#fff'
@@ -223,7 +279,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textShadowColor: '#222',
     textShadowOffset: {width: 1, height: 1},
-    textShadowRadius: 4
+    textShadowRadius: 2
   },
   title: {
     fontSize: 22,

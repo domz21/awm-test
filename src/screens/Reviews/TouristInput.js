@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Image, Text, TextInput, KeyboardAvoidingView, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 
-export default class Input extends Component {
+export default class TouristInput extends Component {
   static propTypes = {
     onSubmit: PropTypes.func
   };
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFF',
     flexDirection: 'row',
-    borderBottomWidth: 1,
+    borderTopWidth: 1,
     borderColor: '#EEE',
     alignItems: 'center',
     paddingLeft: 15,

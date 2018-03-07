@@ -7,7 +7,8 @@ const auth = require('./controllers/auth');
 const reviews = require('./controllers/reviews');
 const restaurants = require('./controllers/restaurants');
 const attractions = require('./controllers/attractions');
-//const router = require('./router');
+const places = require('./controllers/places');
+const tours = require('./controllers/tours');
 
 //import app oauth configs
 const config = require('./config');
@@ -23,42 +24,26 @@ mongoose.connect(config.mongo.dbURI, () => {
   console.log('connected to mongodb');
 });
 
-// var MongoClient = require('mongodb').MongoClient;
-// var url = config.mongo.dbURI;
-//
-// MongoClient.connect(url, function(err, db) {
-//   if (err) throw err;
-//   var dbo = db.db("awm-test");
-//   dbo.collection("restaurants").find({}).toArray(function(err, result) {
-//     if (err) throw err;
-//     console.log(result);
-//     db.close();
-//   });
-// });
-
-
-//logger to output all requests to console
-// app.use(morgan('combined'));
-// app.use('/v1', router);
-
-//auth routes
-// app.get('/auth/facebook', auth.fbLogin);
-// app.get('/auth/google', auth.googleLogin);
-// app.get('/auth/facebook/callback', auth.fbMiddleware, auth.oauthCallback);
-// app.get('/auth/google/callback', auth.googleMiddleware, auth.oauthCallback);
-
 //comment routes
 app.route('/reviews')
   .get(reviews.list)
   .put(reviews.create);
+app.route('/tours')
+  .get(tours.list)
+  .put(tours.create);
 
 //restaurant routes
 app.route('/restaurants')
-  .get(restaurants.listed);
+  .get(restaurants.listed)
+  .put(restaurants.created);
 
 //attraction routes
 app.route('/attractions')
   .get(attractions.attracts);
+
+//all place routes
+app.route('/places')
+  .get(places.placed);
 
 //launch server on port 3000
 const server = app.listen(3000, () => {

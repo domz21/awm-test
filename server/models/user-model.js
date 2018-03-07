@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   oauth_id: {
     type: String,
-    unique: true,
+    unique: false,
     index: true
   },
   name: String,

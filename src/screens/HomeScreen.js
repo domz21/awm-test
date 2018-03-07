@@ -2,11 +2,15 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, ImageBackground, Image, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import Dimensions from 'Dimensions';
-//import HeaderButton from '../components/HeaderButton';
+import HeaderButton from '../components/HeaderButton';
 
 const screen = Dimensions.get('window');
 
 export default class HomeScreen extends PureComponent {
+  static navigationOptions = {
+    title: 'First Screen'
+  };
+
   static propTypes = {
     restaurant: PropTypes.shape({
       name: PropTypes.string.isRequired,

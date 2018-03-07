@@ -15,9 +15,7 @@ const restaurantSchema = new Schema({
   contact: String,
   desc: String,
   image: String,
-  mone: String,
-  mtwo: String,
-  mthree: String
+  menu: String
 });
 
 const Restaurant = mongoose.model('restaurant', restaurantSchema);

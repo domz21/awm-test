@@ -3,20 +3,21 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 
 export default class Callout extends Component {
   render() {
-    const { name, image } = this.props;
+    const { name, image, address } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.bubble}>
           <View>
             <Text style={styles.name}>{name}</Text>
+            <Text style = {styles.name}>{address}</Text>
             <Image
               style={styles.image}
               source={{ uri: image }}
             />
           </View>
         </View>
-        <View style={styles.arrowBorder} />
-        <View style={styles.arrow} />
+        {/*<View style={styles.arrowBorder} />
+        <View style={styles.arrow} />*/}
       </View>
     );
   }
@@ -35,8 +36,8 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     borderColor: '#ccc',
     borderWidth: 0.5,
-    padding: 15,
-    width: 150,
+    padding: 25,
+    width: 500,
   },
   // Arrow below the bubble
   arrow: {

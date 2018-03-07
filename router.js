@@ -9,10 +9,14 @@ import LoginForm from './src/screens/Login/LoginForm';
 import TouristList from './src/screens/TouristList';
 import Modal from './src/screens/Modal';
 import Drawer from './src/components/Drawer';
+import HeaderButton from './src/components/HeaderButton';
 import Restaurant from './src/screens/FoodAdventures/Restaurant';
+import New from './src/screens/FoodAdventures/AddRestaurant';
 import Attraction from './src/screens/Tourista/Attraction';
 import List from './src/screens/List';
+import ReviewList from './src/screens/Reviews/ReviewList';
 import Map from './src/screens/MapView/Map';
+import About from './src/screens/About';
 
 const TabNavigation = TabNavigator({
   Home: {
@@ -52,7 +56,7 @@ const TabNavigation = TabNavigator({
   tabBarOptions: {
     style: {
       backgroundColor: '#A470F7',
-      paddingTop: 20
+      paddingTop: 15
     }
   }
 });
@@ -61,7 +65,16 @@ const TabNavigation = TabNavigator({
 const TabsWithDrawerNavigation = DrawerNavigator({
   Tabs: {
     screen: TabNavigation,
-  }
+  },
+  HeaderButton: {
+    screen: HeaderButton
+  },
+  About: {
+    screen: About
+  },
+  New: {
+    screen: New
+  },
 }, {
   contentComponent: props => <Drawer {...props} />
 });
@@ -91,6 +104,9 @@ export const SignedIn = StackNavigator({
   },
   Restaurant: {
     screen: Restaurant
+  },
+  Map: {
+    screen: Map
   },
   Attraction: {
     screen: Attraction

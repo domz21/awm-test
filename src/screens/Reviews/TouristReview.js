@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { View, Image, Text, KeyboardAvoidingView, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import moment from 'moment';
 
-export default class Review extends PureComponent {
+export default class TouristReview extends PureComponent {
   static propTypes = {
     //review object shape
-    review: PropTypes.shape({
+    tour: PropTypes.shape({
       content: PropTypes.string.isRequired,
       created: PropTypes.string.isRequired,
       //user object shape
@@ -19,9 +19,9 @@ export default class Review extends PureComponent {
 
   render(){
     //review Object
-    const { review } = this.props;
+    const { tour } = this.props;
     //data displayed in review
-    const { content, created } = review;
+    const { content, created } = tour;
     //username and avatar
     //const { name, avatar } = user;
     return(

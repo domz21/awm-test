@@ -10,26 +10,10 @@ import Modal from './src/screens/Modal';
 import Drawer from './src/components/Drawer';
 import Restaurant from './src/screens/FoodAdventures/Restaurant';
 import List from './src/screens/List';
+import ReviewList from './src/screens/Reviews/ReviewList';
+import TouristReviewList from './src/screens/Reviews/TouristReviewList';
 import Login from './src/screens/Login/Login';
-import Reviews from './src/screens/Reviews/List';
 
-// const SettingsTab = StackNavigator({
-//   Settings: {
-//     screen: Settings,
-//     navigationOptions: {
-//       header: null,
-//       headerBackTitle: 'Back'
-//     },
-//   },
-//   Profile: {
-//     screen: Profile,
-//     navigationOptions: ({ navigation }) => ({
-//       title: `${navigation.state.params.user}'s Profile`,
-//     }),
-//   },
-// }, {
-//   headerMode: 'screen'
-// });
 
 export default class App extends React.Component {
   state = {

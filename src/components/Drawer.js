@@ -1,41 +1,54 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class Drawer extends Component {
+  constructor(props){
+    super(props)
+
+    this.state = {
+      userInfo: this.props.navigation.state.params.userInfo,
+    };
+  }
+
   render(){
     const { navigate } = this.props.navigation;
+    //const { userInfo } = this.props.navigation.navigate.state.params.userInfo;
     return(
       <View style = {styles.container}>
         <View style = {styles.head}>
-          <Icon name = "ios-contact-outline" size = {100} color="rgba(0,0,0,.09)" />
-          <Text style = {styles.header}>Aye! Wander Malolos</Text>
+          {/*<Icon name = "ios-contact-outline" size = {100} color="rgba(0,0,0,.09)" />*/}
+          <Image
+            source = {{ uri: this.state.userInfo.picture.data.url }}
+            style = {styles.avatarImage}
+          />
+          <Text style = {styles.header}>{this.state.userInfo.name}</Text>
         </View>
         <TouchableOpacity
-          onPress = {() => navigate('Modal')}
+          onPress = {() => navigate('Home')}
           style = {styles.button}
         >
           <Text style = {styles.font}>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style = {styles.button}
-          onPress = {() => navigate('Drawer Close')}
+          onPress = {() => navigate('About')}
         >
-          <Text style = {styles.font}>About</Text>
+          <Text style = {styles.font}>About Malolos</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style = {styles.button}
-          onPress = {() => navigate('Settings')}
+          onPress = {() => navigate('AttractionsTab')}
         >
-          <Text style = {styles.font}>Upcoming Events</Text>
+          <Text style = {styles.font}>Historical Spots</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style = {styles.button}
-          onPress = {() => navigate('Drawer Close')}
+          onPress = {() => navigate('Map')}
         >
-          <Text style = {styles.font}>My Profile</Text>
+          <Text style = {styles.font}>Map View</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        {/*<TouchableOpacity
           style = {styles.button}
           onPress = {() => navigate('Drawer Close')}
         >
@@ -46,14 +59,14 @@ export default class Drawer extends Component {
           onPress = {() => navigate('Drawer Close')}
         >
           <Text style = {styles.font}>My Establishments</Text>
-        </TouchableOpacity>
+        </TouchableOpacity>*/}
         <TouchableOpacity
           style = {styles.button}
-          onPress = {() => navigate('Drawer Close')}
+          onPress = {() => navigate('New')}
         >
-          <Text style = {styles.font}>Add a Place</Text>
+          <Text style = {styles.font}>Add a New Restaurant</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        {/*<TouchableOpacity
           style = {styles.button}
           onPress = {() => navigate('Drawer Close')}
         >
@@ -64,7 +77,7 @@ export default class Drawer extends Component {
           onPress = {() => navigate('Drawer Close')}
         >
           <Text style = {styles.font}>Settings</Text>
-        </TouchableOpacity>
+        </TouchableOpacity>*/}
         <TouchableOpacity
           style = {styles.button}
           onPress = {() => navigate('Login')}
@@ -82,21 +95,27 @@ const styles = StyleSheet.create({
     backgroundColor: '#F7F5FA',
     //alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 15
   },
   head: {
     backgroundColor: '#A470F7',
     padding: 20,
     margin: -20
   },
+  avatarImage: {
+    marginTop: 20,
+    marginBottom: 10,
+    borderRadius: 50,
+    height: 100,
+    width: 100,
+  },
   header: {
     fontSize: 20,
-    marginVertical: 20,
+    //marginVertical: 20,
     fontWeight: 'bold',
-    fontFamily: 'Roboto',
+    //fontFamily: 'Roboto',
     color: '#fff'
   },
-  font: {
-    fontFamily: 'Roboto'
-  }
+
 });

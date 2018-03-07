@@ -1,17 +1,42 @@
 import React, { Component, PropTypes } from 'react';
-import { View, RefreshControl, ScrollView, StyleSheet } from 'react-native';
+import { View, RefreshControl, ScrollView, TextInput, StyleSheet } from 'react-native';
+//import SearchInput, { createFilter } from 'react-native-search-filter';
 import { get, put } from '../../api';
 import HomeScreen from './HomeScreen';
 import Restaurant from './FoodAdventures/Restaurant';
+import { SearchBar } from 'react-native-elements';
+
+const KEYS_TO_FILTERS = ['name', 'type'];
 
 
 export default class List extends Component {
+  constructor() {
+    super();
+    this.state = {
+      restaurants: [],
+      dataBackup: [],
+      popupIsOpen: false,
+      refreshing: true
+    }
+  }
+  setSearchText(event){
+    searchText = event.nativeEvent.text;
+    restaurants = this.state.dataBackup;
+    searchText = searchText.trim().toLowerCase();
 
-  state = {
-    popupIsOpen: false,
-    restaurants: [], //restaurant array fetched from backend
-    refreshing: true
-  };
+    restaurants = restaurants.filter(restaurant => {
+      restaurant.name.match( searchText );
+    });
+    this.setState({
+      restaurants: restaurants
+    });
+  }
+
+  // state = {
+  //   popupIsOpen: false,
+  //   restaurants: [], //restaurant array fetched from backend
+  //   refreshing: true
+  // };
 
   openRestaurant = (restaurant) => {
     this.setState({
@@ -47,14 +72,20 @@ export default class List extends Component {
         restaurants: json.restaurants
       });
     }catch(err){
-      alert(err);
+      //alert(err);
     }
   };
 
   render(){
     const { restaurants } = this.state;
+    //const filteredRestaurants = restaurants.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS))
     return (
       <View style = {styles.container}>
+        <SearchBar
+          lightTheme
+          onChange = {this.setSearchText.bind(this)}
+          placeholder = 'Type here...'
+        />
         <ScrollView
           ref = {(scrollView) => { this._scrollView = scrollView; }}
           refreshControl = {
@@ -70,6 +101,16 @@ export default class List extends Component {
             onOpen = {this.openRestaurant}
             key = {index} />
           )}
+          {/*{filteredRestaurants.map(restaurant => {
+            return (
+              <TouchableOpacity onPress={()=>alert(restaurant.name)} key={restaurant.id} style={styles.emailItem}>
+                <View>
+                  <Text>{restaurant.name}</Text>
+                  <Text style={styles.emailSubject}>{restaurant.type}</Text>
+                </View>
+              </TouchableOpacity>
+            )
+          })}*/}
         </ScrollView>
         <Restaurant
           restaurant = {this.state.restaurant}
@@ -85,6 +126,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 20
   }
 });

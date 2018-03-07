@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const reviewSchema = new Schema({
+const tourSchema = new Schema({
   // user: {
   //   type: Schema.ObjectId,
   //   ref: 'User'
@@ -10,6 +10,6 @@ const reviewSchema = new Schema({
   created: Date
 });
 
-const Review = mongoose.model('review', reviewSchema);
+const Tour = mongoose.model('tour', tourSchema);
 
-module.exports = Review;
+module.exports = Tour;

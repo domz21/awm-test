@@ -1,4 +1,4 @@
-const Review = require('../models/review-model');
+const Tour = require('../models/tour-model');
 
 // const userRelation = {
 //   path: 'user',
@@ -8,12 +8,12 @@ const Review = require('../models/review-model');
 
 //list existing reviews
 const list = async(req, res, next) => {
-  const reviews = await Review.find()
+  const tours = await Tour.find()
     .sort({ 'created': -1 })
     //.populate(userRelation)
     .exec();
   res.json({
-    reviews
+    tours
   });
 };
 
@@ -21,14 +21,14 @@ const list = async(req, res, next) => {
 const create = async(req, res, next) => {
   const { content } = req.body;
   //save comments
-  const review = await new Review({
+  const tour = await new Tour({
     //user: user_id,
     content: content,
     created: new Date,
   }).save();
 
   res.json({
-    review: await Review.findById(review._id)
+    tour: await Tour.findById(tour._id)
       //.populate(userRelation)
       .exec()
   });
